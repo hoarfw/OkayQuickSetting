@@ -14,6 +14,7 @@ public class ScreenUtils {
         exeCommand("setprop sys.close.mainTp 0");
         exeCommand("setprop sys.close.mainPen 0");
         exeCommand("setprop ro.core_ctl_min_cpu 2");
+        exeCommand("setprop ro.core_ctl_max_cpu 4");
         //exeCommand("wm size 1200x1920");
         //exeCommand("wm density 300");
         exeCommand("chmod 777 /sys/class/leds/lcd-backlight/max_brightness");
@@ -46,6 +47,7 @@ public class ScreenUtils {
         exeCommand("setprop sys.eink.Appmode 13");
         exeCommand("setprop persist.eink.GLD_Refresh_Count 10");
         exeCommand("setprop ro.core_ctl_min_cpu 1");
+        exeCommand("setprop ro.core_ctl_max_cpu 1");
         exeCommand("setprop persist.demo.hdmirotation portrait");
         exeCommand("setprop sys.eink.reconfigure 1");
     }
