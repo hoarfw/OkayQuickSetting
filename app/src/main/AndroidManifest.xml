@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ncentury.sideprojects.okayquicksetting">
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -36,6 +37,7 @@
             </intent-filter>
         </receiver>
 
+        <receiver android:exported="true" android:name="com.ncentury.sideprojects.okayquicksetting.ScreenReceiver"/>
     </application>
 
 </manifest>

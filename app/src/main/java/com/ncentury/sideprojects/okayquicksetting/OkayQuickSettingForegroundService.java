@@ -28,19 +28,32 @@ public class OkayQuickSettingForegroundService  extends Service {
     public static final String ACTION_STOP_FOREGROUND_SERVICE = "ACTION_STOP_OKAY_QSFG_SERVICE";
     private static final String TAG_FOREGROUND_SERVICE = "OKAY_QSFG_SERVICE";
 
-    private IntentFilter intentFilter;
+    //private IntentFilter intentFilter;
     private Context mContext;
     //private RingerModeChangeReceiver ringerModeChangeReceiver;
-    //private ScreenReceiver screenReceiver;
+    private ScreenReceiver screenReceiver;
 
-    private void baseDataInit() {
+
+
+    public void onCreate()
+    {
+        super.onCreate();
         this.mContext = this;
-        this.intentFilter = new IntentFilter();
-        this.intentFilter.addAction("android.intent.action.CLOSE_SYSTEM_DIALOGS");
+        //this.intentFilter = new IntentFilter();
+        //this.intentFilter.addAction("android.intent.action.CLOSE_SYSTEM_DIALOGS");
         //this.ringerModeChangeReceiver = new RingerModeChangeReceiver();
         //registerReceiver(this.ringerModeChangeReceiver, this.intentFilter);
+        final IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
+        filter.addAction(Intent.ACTION_SCREEN_OFF);
+        screenReceiver = new ScreenReceiver();
+        registerReceiver(screenReceiver, filter);
     }
 
+    public void onDestroy()
+    {
+        super.onDestroy();
+        unregisterReceiver(this.screenReceiver);
+    }
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -56,7 +69,7 @@ public class OkayQuickSettingForegroundService  extends Service {
         Object localObject = PendingIntent.getActivity(this, 0, new Intent(), 0);
         NotificationCompat.Builder localBuilder = new NotificationCompat.Builder(this,"default");
         NotificationCompat.BigTextStyle localBigTextStyle = new NotificationCompat.BigTextStyle();
-        localBigTextStyle.setBigContentTitle("OKAY屏幕一键切换v1.0.1 - Ken.J.(Q519637737)");
+        localBigTextStyle.setBigContentTitle("OKAY屏幕一键切换v1.0.3 - Ken.J.(Q519637737)");
         localBigTextStyle.bigText("");
         localBuilder.setStyle(localBigTextStyle);
         localBuilder.setWhen(System.currentTimeMillis());
@@ -84,12 +97,9 @@ public class OkayQuickSettingForegroundService  extends Service {
         //startForeground(1, localBuilder.build());
         manager.notify(1,notification);
 
-        /*
-        final IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-        filter.addAction(Intent.ACTION_SCREEN_OFF);
-        screenReceiver = new ScreenReceiver();
-        registerReceiver(screenReceiver, filter);
-        */
+
+
+
     }
 
     private void stopForegroundService() throws IOException {
