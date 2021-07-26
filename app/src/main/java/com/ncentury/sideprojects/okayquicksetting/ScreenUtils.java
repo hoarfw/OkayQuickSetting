@@ -44,7 +44,7 @@ public class ScreenUtils {
         //exeCommand("wm size 1404x1872");
         //exeCommand("wm density 300");
         exeCommand("setprop sys.eink.Appmode 13");
-        exeCommand("setprop persist.eink.GLD_Refresh_Count 50");
+        exeCommand("setprop persist.eink.GLD_Refresh_Count 10");
         exeCommand("setprop ro.core_ctl_min_cpu 1");
         exeCommand("setprop persist.demo.hdmirotation portrait");
         exeCommand("setprop sys.eink.reconfigure 1");
