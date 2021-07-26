@@ -56,7 +56,7 @@ public class OkayQuickSettingForegroundService  extends Service {
         Object localObject = PendingIntent.getActivity(this, 0, new Intent(), 0);
         NotificationCompat.Builder localBuilder = new NotificationCompat.Builder(this,"default");
         NotificationCompat.BigTextStyle localBigTextStyle = new NotificationCompat.BigTextStyle();
-        localBigTextStyle.setBigContentTitle("OKAY屏幕一键切换v1.0.0 - Ken.J.(Q519637737)");
+        localBigTextStyle.setBigContentTitle("OKAY屏幕一键切换v1.0.1 - Ken.J.(Q519637737)");
         localBigTextStyle.bigText("");
         localBuilder.setStyle(localBigTextStyle);
         localBuilder.setWhen(System.currentTimeMillis());
@@ -122,6 +122,7 @@ public class OkayQuickSettingForegroundService  extends Service {
                     ScreenUtils.OpenEinkDisplay();
                     ScreenUtils.AdjustResolution();
                     ScreenUtils.EnableMirrorMode();
+                    ScreenUtils.CloseMainDisplay();
                     Toast.makeText(getApplicationContext(), "阅读模式", Toast.LENGTH_SHORT).show();
                 } else if (action == ACTION_DUAL_MODE && ScreenUtils.CURRENT_MODE != MODE.DUAL) {
                     ScreenUtils.CURRENT_MODE = MODE.DUAL;

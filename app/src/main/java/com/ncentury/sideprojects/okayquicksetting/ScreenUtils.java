@@ -83,6 +83,6 @@ public class ScreenUtils {
             exeCommand("wm density 300");
         }
         exeCommand("ro.rotation.external true");
-
+        exeCommand("qemu.hw.mainkeys 1");
     }
 }

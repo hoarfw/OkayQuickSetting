@@ -16,6 +16,19 @@
             </intent-filter>
         </activity>
         <service android:enabled="true" android:exported="true" android:name="com.ncentury.sideprojects.okayquicksetting.OkayQuickSettingForegroundService"/>
+        <!--
+        <service
+            android:name="com.ncentury.sideprojects.okayquicksetting.ButtonRemapService"
+            android:label="@string/app_name"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data android:name="android.accessibilityservice"
+                android:resource="@xml/service_config" />
+        </service>
+        -->
         <receiver android:exported="true" android:name="com.ncentury.sideprojects.okayquicksetting.AutoStartReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
