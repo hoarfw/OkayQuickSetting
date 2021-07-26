@@ -31,7 +31,7 @@ public class OkayQuickSettingForegroundService  extends Service {
     private IntentFilter intentFilter;
     private Context mContext;
     //private RingerModeChangeReceiver ringerModeChangeReceiver;
-    private ScreenReceiver screenReceiver;
+    //private ScreenReceiver screenReceiver;
 
     private void baseDataInit() {
         this.mContext = this;
@@ -84,11 +84,12 @@ public class OkayQuickSettingForegroundService  extends Service {
         //startForeground(1, localBuilder.build());
         manager.notify(1,notification);
 
+        /*
         final IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         filter.addAction(Intent.ACTION_SCREEN_OFF);
         screenReceiver = new ScreenReceiver();
         registerReceiver(screenReceiver, filter);
-
+        */
     }
 
     private void stopForegroundService() throws IOException {
