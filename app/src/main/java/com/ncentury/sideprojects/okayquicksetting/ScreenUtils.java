@@ -1,11 +1,13 @@
 package com.ncentury.sideprojects.okayquicksetting;
 
+import android.widget.Toast;
+
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
 public class ScreenUtils {
-    public static MODE CURRENT_MODE=MODE.UNKNOWN;
-    public static MODE LAST_MODE=MODE.UNKNOWN;
+    public static MODE CURRENT_MODE=MODE.DUAL;
+    //public static MODE LAST_MODE=MODE.DUAL;
     public static void exeCommand(String paramString) throws IOException, TimeoutException {
          RootCmd.execRootCmdSilent(paramString + "\n");
     }
@@ -39,9 +41,12 @@ public class ScreenUtils {
 
     public static void OpenEinkDisplay() throws IOException, TimeoutException {
         //打开副屏：打开副屏显示+触摸，显示合适分辨率，设置方向，设置合适参数
-        //exeCommand("setprop sys.open.eink.power 1");
+        exeCommand("setprop sys.open.eink.power 1");
+        exeCommand("setprop sys.eink.HandWriter 1");
         exeCommand("setprop sys.close.subTp 0");
         exeCommand("setprop sys.close.SubPen 0");
+        exeCommand("setprop  sys.eink.tp2main 1");
+
         //exeCommand("wm size 1404x1872");
         //exeCommand("wm density 300");
         exeCommand("setprop sys.eink.Appmode 13");
@@ -54,9 +59,11 @@ public class ScreenUtils {
 
     public static void CloseEinkDisplay() throws IOException, TimeoutException {
         //打开副屏：打开副屏显示+触摸，显示合适分辨率，设置方向，设置合适参数
-        //exeCommand("setprop sys.open.eink.power 0");
+        exeCommand("setprop sys.open.eink.power 0");
+        exeCommand("setprop sys.eink.HandWriter 0");
         exeCommand("setprop sys.close.subTp 1");
         exeCommand("setprop sys.close.SubPen 1");
+        exeCommand("setprop  sys.eink.tp2main 0");
     }
 
     public static void ReconfigEinkDisplay() throws IOException, TimeoutException {
@@ -77,10 +84,10 @@ public class ScreenUtils {
     }
 
     public static void AdjustResolution() throws IOException, TimeoutException {
-        if( CURRENT_MODE==MODE.READ && LAST_MODE!=MODE.READ){
+        if( CURRENT_MODE==MODE.READ){
             exeCommand("wm size 1404x1872");
             exeCommand("wm density 300");
-        }else if (CURRENT_MODE!=MODE.READ && (LAST_MODE==MODE.READ || LAST_MODE==MODE.UNKNOWN)){
+        }else{
             exeCommand("wm size 1200x1920");
             exeCommand("wm density 300");
         }
@@ -88,4 +95,32 @@ public class ScreenUtils {
         //exeCommand("qemu.hw.mainkeys 1");
     }
 
+    public static void SwitchToVideoMode() throws IOException, TimeoutException {
+        //LAST_MODE=CURRENT_MODE;
+        CURRENT_MODE = MODE.VIDEO;
+        DisableMirrorMode();
+        CloseMainDisplay();
+        AdjustResolution();
+        OpenMainDisplay();
+    }
+
+    public static void SwitchToReadMode() throws IOException, TimeoutException {
+        //LAST_MODE=CURRENT_MODE;
+        CURRENT_MODE = MODE.READ;
+        CloseMainDisplay();
+        OpenEinkDisplay();
+        AdjustResolution();
+        EnableMirrorMode();
+        CloseMainDisplay();
+    }
+
+    public static void SwitchToDualMode() throws IOException, TimeoutException {
+        //LAST_MODE=CURRENT_MODE;
+        CURRENT_MODE = MODE.DUAL;
+        CloseMainDisplay();
+        OpenEinkDisplay();
+        AdjustResolution();
+        OpenMainDisplay();
+        EnableMirrorMode();
+    }
 }

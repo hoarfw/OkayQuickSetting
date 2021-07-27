@@ -57,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
         TextView versionName = findViewById(R.id.appName);
         versionName.setText(getApplicationName(this)+" v" + BuildConfig.VERSION_NAME);
 
@@ -73,6 +76,13 @@ public class MainActivity extends AppCompatActivity {
         Intent paramBundle2 = new Intent(getApplicationContext(), ButtonRemapService.class);
         paramBundle.setAction("ACTION_START_BTNMAP_SERVICE");
         startService(paramBundle2);
+
+        SPUtil.init(this.getApplicationContext());
+        MODE mode = MODE.valueOf(SPUtil.get("CURRENT_MODE", "DUAL"));
+        String action=mode==MODE.READ?"ACTION_READ_MODE":mode==MODE.VIDEO?"ACTION_VEDIO_MODE":"ACTION_DUAL_MODE";
+        paramBundle.setAction(action);
+        startService(paramBundle2);
+
 
     }
 

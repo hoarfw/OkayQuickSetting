@@ -7,8 +7,10 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.graphics.BitmapFactory;
 import android.os.IBinder;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.concurrent.TimeoutException;
 
 public class OkayQuickSettingForegroundService  extends Service {
@@ -63,7 +66,6 @@ public class OkayQuickSettingForegroundService  extends Service {
 
     private void startForegroundService() throws IOException {
         Log.d(TAG_FOREGROUND_SERVICE, "Start foreground service.");
-
 
         NotificationManager manager= (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 
@@ -114,36 +116,24 @@ public class OkayQuickSettingForegroundService  extends Service {
 
     public int onStartCommand(Intent paramIntent, int paramInt1, int paramInt2) {
         try {
+            if(paramIntent==null)
+                return super.onStartCommand(paramIntent, paramInt1, paramInt2);
             String action = paramIntent.getAction();
-
             if(action==ACTION_TURN_OFF_LCD){
                 ScreenUtils.CloseMainDisplay();
-
             }else {
-                ScreenUtils.LAST_MODE = ScreenUtils.CURRENT_MODE;
+                //ScreenUtils.LAST_MODE = ScreenUtils.CURRENT_MODE;
                 if (action == ACTION_VEDIO_MODE && ScreenUtils.CURRENT_MODE != MODE.VIDEO) {
-                    ScreenUtils.CURRENT_MODE = MODE.VIDEO;
-                    ScreenUtils.DisableMirrorMode();
-                    ScreenUtils.CloseMainDisplay();
-                    ScreenUtils.AdjustResolution();
-                    ScreenUtils.OpenMainDisplay();
+                    ScreenUtils.SwitchToVideoMode();
+                    SPUtil.save("CURRENT_MODE",MODE.VIDEO.name());
                     Toast.makeText(getApplicationContext(), "视频模式", Toast.LENGTH_SHORT).show();
                 } else if (action == ACTION_READ_MODE && ScreenUtils.CURRENT_MODE != MODE.READ) {
-                    ScreenUtils.CURRENT_MODE = MODE.READ;
-                    ScreenUtils.CloseMainDisplay();
-                    ScreenUtils.OpenEinkDisplay();
-                    ScreenUtils.AdjustResolution();
-                    ScreenUtils.EnableMirrorMode();
-                    ScreenUtils.CloseMainDisplay();
+                    ScreenUtils.SwitchToReadMode();
+                    SPUtil.save("CURRENT_MODE",MODE.READ.name());
                     Toast.makeText(getApplicationContext(), "阅读模式", Toast.LENGTH_SHORT).show();
                 } else if (action == ACTION_DUAL_MODE && ScreenUtils.CURRENT_MODE != MODE.DUAL) {
-                    ScreenUtils.CURRENT_MODE = MODE.DUAL;
-
-                    ScreenUtils.CloseMainDisplay();
-                    ScreenUtils.OpenEinkDisplay();
-                    ScreenUtils.AdjustResolution();
-                    ScreenUtils.OpenMainDisplay();
-                    ScreenUtils.EnableMirrorMode();
+                    ScreenUtils.SwitchToDualMode();
+                    SPUtil.save("CURRENT_MODE",MODE.DUAL.name());
                     Toast.makeText(getApplicationContext(), "双屏模式", Toast.LENGTH_SHORT).show();
                 } else if (action == ACTION_START_FOREGROUND_SERVICE) {
                     startForegroundService();
