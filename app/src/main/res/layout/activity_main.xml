@@ -12,19 +12,34 @@
         android:layout_height="wrap_content"
         android:text="By Ken J.(Q519737737)"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.61" />
+        app:layout_constraintVertical_bias="0.112" />
 
     <TextView
+        android:id="@+id/appName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="OKAY屏幕一键切换"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.043" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="392dp"
+        android:layout_height="490dp"
+        android:singleLine="false"
+        android:text="使用要求:\n\t   授于ROOT权限\n\t   打开辅助功能(可选)\n\n功能介绍：\n\t1.视频模式\n\t   关闭墨水屏打开主屏\n\t   优化屏分辩率\n\t   提升CPU性能\n\t2.阅读模式\n\t   打开墨水屏关闭主屏\n\t   优化屏分辩率\n\t   控制CPU性能和功能\n\t   优化墨水屏显示\n\t3.双屏模式\n\t   打开墨水屏打开主屏\n\t   其它同上\n\t4.按键映射\n\t   对于S4打开辅助功能后将右边语音键映射为翻页键"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </android.support.constraint.ConstraintLayout>

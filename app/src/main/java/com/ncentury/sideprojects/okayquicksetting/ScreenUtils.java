@@ -80,11 +80,11 @@ public class ScreenUtils {
         if( CURRENT_MODE==MODE.READ && LAST_MODE!=MODE.READ){
             exeCommand("wm size 1404x1872");
             exeCommand("wm density 300");
-        }else if (CURRENT_MODE!=MODE.READ && LAST_MODE==MODE.READ){
+        }else if (CURRENT_MODE!=MODE.READ && (LAST_MODE==MODE.READ || LAST_MODE==MODE.UNKNOWN)){
             exeCommand("wm size 1200x1920");
             exeCommand("wm density 300");
         }
         exeCommand("ro.rotation.external true");
-        exeCommand("qemu.hw.mainkeys 1");
+        //exeCommand("qemu.hw.mainkeys 1");
     }
 }

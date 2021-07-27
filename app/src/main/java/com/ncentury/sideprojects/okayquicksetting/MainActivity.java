@@ -1,9 +1,13 @@
 package com.ncentury.sideprojects.okayquicksetting;
 
+import android.content.Context;
+import android.os.Build;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
 
@@ -14,6 +18,7 @@ import java.util.concurrent.TimeoutException;
 
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = "MainActivity";
     /**
      * 应用程序运行命令获取 Root权限，设备必须已破解(获得ROOT权限)
      *
@@ -43,22 +48,32 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    public static String getApplicationName(Context context) {
+        return context.getApplicationInfo().loadLabel(context.getPackageManager()).toString();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);
+        TextView versionName = findViewById(R.id.appName);
+        versionName.setText(getApplicationName(this)+" v" + BuildConfig.VERSION_NAME);
+
+
         upgradeRootPermission(getPackageCodePath());
 
         Intent paramBundle = new Intent(getApplicationContext(), OkayQuickSettingForegroundService.class);
         paramBundle.setAction("ACTION_START_OKAY_QSFG_SERVICE");
         startService(paramBundle);
-        //if(!accessibilityServiceEnabled()) {
-        //    Toast.makeText(getApplicationContext(),"辅助功能未打开，请先在设置中打开辅助功能选项",Toast.LENGTH_SHORT).show();
-        //}
-        //Intent paramBundle2 = new Intent(getApplicationContext(), ButtonRemapService.class);
-        //paramBundle.setAction("ACTION_START_BTNMAP_SERVICE");
-        //startService(paramBundle2);
-        finish();
+
+        if(!accessibilityServiceEnabled()) {
+            Toast.makeText(getApplicationContext(),"辅助功能未打开,按键映射功能不能使用，请先在设置中打开辅助功能选项",Toast.LENGTH_SHORT).show();
+        }
+        Intent paramBundle2 = new Intent(getApplicationContext(), ButtonRemapService.class);
+        paramBundle.setAction("ACTION_START_BTNMAP_SERVICE");
+        startService(paramBundle2);
+
     }
 
     private boolean accessibilityServiceEnabled() {
