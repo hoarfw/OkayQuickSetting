@@ -70,7 +70,7 @@ public class OkayQuickSettingForegroundService  extends Service {
         Object localObject = PendingIntent.getActivity(this, 0, new Intent(), 0);
         NotificationCompat.Builder localBuilder = new NotificationCompat.Builder(this,"default");
         NotificationCompat.BigTextStyle localBigTextStyle = new NotificationCompat.BigTextStyle();
-        localBigTextStyle.setBigContentTitle("OKAY屏幕一键切换v1.0.5 - Ken.J.(Q519637737)");
+        localBigTextStyle.setBigContentTitle("OKAY屏幕一键切换 - Ken.J.(Q519637737)");
         localBigTextStyle.bigText("");
         localBuilder.setStyle(localBigTextStyle);
         localBuilder.setWhen(System.currentTimeMillis());

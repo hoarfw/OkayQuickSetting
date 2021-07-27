@@ -87,4 +87,5 @@ public class ScreenUtils {
         exeCommand("ro.rotation.external true");
         //exeCommand("qemu.hw.mainkeys 1");
     }
+
 }
