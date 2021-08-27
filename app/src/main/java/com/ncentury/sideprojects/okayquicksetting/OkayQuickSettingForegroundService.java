@@ -98,6 +98,19 @@ public class OkayQuickSettingForegroundService  extends Service {
 
         Notification notification=localBuilder.build();
         //startForeground(1, localBuilder.build());
+
+        //Intent notificationIntent = new Intent(mContext, MainActivity.class);
+        //com.tencent.weread.eink
+        //Intent notificationIntent = getPackageManager().getLaunchIntentForPackage("com.realbyteapps.quickly");
+        //notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        //notificationIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
+        //PendingIntent intent = PendingIntent.getActivity(mContext, 0,notificationIntent, 0);
+        //notification.contentIntent=intent;
+        //notification.setLatestEventInfo(mContext, "title", "message", intent);
+        //notification.flags |= Notification.FLAG_AUTO_CANCEL;
+
         manager.notify(1,notification);
 
 
