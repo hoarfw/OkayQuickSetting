@@ -15,7 +15,7 @@ public class ScreenUtils {
     public static void OpenMainDisplay() throws IOException, TimeoutException {
         exeCommand("setprop sys.close.mainTp 0");
         exeCommand("setprop sys.close.mainPen 0");
-        exeCommand("setprop ro.core_ctl_min_cpu 2");
+        exeCommand("setprop ro.core_ctl_min_cpu 1");
         exeCommand("setprop ro.core_ctl_max_cpu 4");
         //exeCommand("wm size 1200x1920");
         //exeCommand("wm density 300");
@@ -118,8 +118,8 @@ public class ScreenUtils {
             exeCommand("wm size reset");
             exeCommand("wm density reset");
         }
-        exeCommand("ro.rotation.external true");
-        //exeCommand("qemu.hw.mainkeys 1");
+        exeCommand("ro.rotation.external false");
+        exeCommand("qemu.hw.mainkeys 1");
     }
 
     public static void SwitchToVideoMode() throws IOException, TimeoutException {
