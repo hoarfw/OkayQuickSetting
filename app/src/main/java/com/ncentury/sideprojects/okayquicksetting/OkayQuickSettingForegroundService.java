@@ -24,7 +24,7 @@ import java.util.concurrent.TimeoutException;
 
 public class OkayQuickSettingForegroundService  extends Service {
     public static final String ACTION_READ_MODE = "ACTION_READ_MODE";
-    public static final String ACTION_VEDIO_MODE = "ACTION_VEDIO_MODE";
+    public static final String ACTION_VIDEO_MODE = "ACTION_VIDEO_MODE";
     public static final String ACTION_DUAL_MODE = "ACTION_DUAL_MODE";
     public static final String ACTION_TURN_OFF_LCD = "ACTION_TURN_OFF_LCD";
     public static final String ACTION_START_FOREGROUND_SERVICE = "ACTION_START_OKAY_QSFG_SERVICE";
@@ -81,7 +81,7 @@ public class OkayQuickSettingForegroundService  extends Service {
         localBuilder.setPriority(2);
         localBuilder.setFullScreenIntent((PendingIntent) localObject, true);
         localObject = new Intent(this, OkayQuickSettingForegroundService.class);
-        ((Intent) localObject).setAction(ACTION_VEDIO_MODE);
+        ((Intent) localObject).setAction(ACTION_VIDEO_MODE);
         localBuilder.addAction(new NotificationCompat.Action( R.drawable.video, "视频模式", PendingIntent.getService(this, 0, (Intent) localObject, 0)));
 
         localObject = new Intent(this, OkayQuickSettingForegroundService.class);
@@ -136,7 +136,7 @@ public class OkayQuickSettingForegroundService  extends Service {
                 ScreenUtils.CloseMainDisplay();
             }else {
                 //ScreenUtils.LAST_MODE = ScreenUtils.CURRENT_MODE;
-                if (action == ACTION_VEDIO_MODE && ScreenUtils.CURRENT_MODE != MODE.VIDEO) {
+                if (action == ACTION_VIDEO_MODE && ScreenUtils.CURRENT_MODE != MODE.VIDEO) {
                     ScreenUtils.SwitchToVideoMode();
                     SPUtil.save("CURRENT_MODE",MODE.VIDEO.name());
                     Toast.makeText(getApplicationContext(), "视频模式", Toast.LENGTH_SHORT).show();

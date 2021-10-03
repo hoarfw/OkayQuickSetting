@@ -91,8 +91,10 @@ public class MainActivity extends AppCompatActivity {
 
         Intent paramBundle3 = new Intent(getApplicationContext(), OkayQuickSettingForegroundService.class);
         //MODE mode = MODE.valueOf(SPUtil.get("CURRENT_MODE", "DUAL"));
-        MODE mode=MODE.DUAL;
-        String action=mode==MODE.READ?"ACTION_READ_MODE":mode==MODE.VIDEO?"ACTION_VEDIO_MODE":"ACTION_DUAL_MODE";
+        //MODE mode=MODE.DUAL;
+        //String action=mode==MODE.READ?"ACTION_READ_MODE":mode==MODE.VIDEO?"ACTION_VEDIO_MODE":"ACTION_DUAL_MODE";
+        //Hard set to VIDEO mode when start up
+        String action="ACTION_VIDEO_MODE";
         paramBundle3.setAction(action);
         startService(paramBundle3);
         /*

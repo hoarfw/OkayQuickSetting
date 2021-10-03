@@ -21,10 +21,10 @@ public class ScreenUtils {
         //exeCommand("wm density 300");
         exeCommand("chmod 777 /sys/class/leds/lcd-backlight/max_brightness");
         exeCommand("echo 255 > /sys/class/leds/lcd-backlight/max_brightness");
-        exeCommand("chmod 444 /sys/class/leds/lcd-backlight/max_brightness");
+        //exeCommand("chmod 444 /sys/class/leds/lcd-backlight/max_brightness");
         exeCommand("chmod 777 /sys/class/leds/lcd-backlight/brightness");
         exeCommand("echo 255 > /sys/class/leds/lcd-backlight/brightness");
-        exeCommand("chmod 444 /sys/class/leds/lcd-backlight/brightness");
+        //exeCommand("chmod 444 /sys/class/leds/lcd-backlight/brightness");
     }
 
     public static void CloseMainDisplay() throws IOException, TimeoutException {
@@ -33,10 +33,10 @@ public class ScreenUtils {
         exeCommand("setprop sys.close.mainPen 1");
         exeCommand("chmod 777 /sys/class/leds/lcd-backlight/max_brightness");
         exeCommand("echo 0 > /sys/class/leds/lcd-backlight/max_brightness");
-        exeCommand("chmod 444 /sys/class/leds/lcd-backlight/max_brightness");
+        //exeCommand("chmod 444 /sys/class/leds/lcd-backlight/max_brightness");
         exeCommand("chmod 777 /sys/class/leds/lcd-backlight/brightness");
         exeCommand("echo 0 > /sys/class/leds/lcd-backlight/brightness");
-        exeCommand("chmod 444 /sys/class/leds/lcd-backlight/brightness");
+        //exeCommand("chmod 444 /sys/class/leds/lcd-backlight/brightness");
     }
 
     public static void OpenEinkDisplay() throws IOException, TimeoutException {
@@ -75,7 +75,7 @@ public class ScreenUtils {
     public static void CloseEinkDisplay() throws IOException, TimeoutException {
         //打开副屏：打开副屏显示+触摸，显示合适分辨率，设置方向，设置合适参数
         exeCommand("setprop sys.open.eink.power 0");
-        exeCommand("setprop sys.eink.HandWriter 0");
+        exeCommand("setprop sys.eink.HandWriter 1");
         exeCommand("setprop sys.close.subTp 1");
         exeCommand("setprop sys.close.SubPen 1");
         exeCommand("setprop  sys.eink.tp2main 0");
