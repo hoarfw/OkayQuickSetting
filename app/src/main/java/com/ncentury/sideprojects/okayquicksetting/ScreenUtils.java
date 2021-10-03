@@ -78,7 +78,7 @@ public class ScreenUtils {
         exeCommand("setprop sys.eink.HandWriter 1");
         exeCommand("setprop sys.close.subTp 1");
         exeCommand("setprop sys.close.SubPen 1");
-        exeCommand("setprop  sys.eink.tp2main 0");
+        //exeCommand("setprop  sys.eink.tp2main 0");
     }
 
     public static void ReconfigEinkDisplay() throws IOException, TimeoutException {
@@ -106,19 +106,19 @@ public class ScreenUtils {
             exeCommand("wm size 750x1000");
             exeCommand("wm density 160");
         }else if( CURRENT_MODE==MODE.VIDEO){
-            //exeCommand("wm size 1200x1920");
-            //exeCommand("wm density 300");
+            exeCommand("wm size 1200x1920");
+            exeCommand("wm density 300");
             //exeCommand("wm size reset");
-            exeCommand("wm size reset");
-            exeCommand("wm density reset");
+            //exeCommand("wm size reset");
+            //exeCommand("wm density reset");
         }else if( CURRENT_MODE==MODE.DUAL){
-            //exeCommand("wm size 1200x1920");
-            //exeCommand("wm density 300");
+            exeCommand("wm size 1200x1920");
+            exeCommand("wm density 300");
             //exeCommand("wm size reset");
-            exeCommand("wm size reset");
-            exeCommand("wm density reset");
+            //exeCommand("wm size reset");
+            //exeCommand("wm density reset");
         }
-        exeCommand("ro.rotation.external false");
+        exeCommand("ro.rotation.external true");
         exeCommand("qemu.hw.mainkeys 1");
     }
 
