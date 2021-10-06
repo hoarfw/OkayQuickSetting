@@ -1,2 +1,2 @@
-rootProject.name = "Okay屏幕一键切换"
+rootProject.name = "屏幕切换"
 include ':app'
