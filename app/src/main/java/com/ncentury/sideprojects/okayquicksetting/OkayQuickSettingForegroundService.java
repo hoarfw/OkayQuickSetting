@@ -26,6 +26,7 @@ public class OkayQuickSettingForegroundService  extends Service {
     public static final String ACTION_READ_MODE = "ACTION_READ_MODE";
     public static final String ACTION_VIDEO_MODE = "ACTION_VIDEO_MODE";
     public static final String ACTION_DUAL_MODE = "ACTION_DUAL_MODE";
+    public static final String ACTION_DEFAULT_MODE="ACTION_DEFAULT_MODE";
     public static final String ACTION_TURN_OFF_LCD = "ACTION_TURN_OFF_LCD";
     public static final String ACTION_START_FOREGROUND_SERVICE = "ACTION_START_OKAY_QSFG_SERVICE";
     public static final String ACTION_STOP_FOREGROUND_SERVICE = "ACTION_STOP_OKAY_QSFG_SERVICE";
@@ -148,7 +149,11 @@ public class OkayQuickSettingForegroundService  extends Service {
                     ScreenUtils.SwitchToDualMode();
                     SPUtil.save("CURRENT_MODE",MODE.DUAL.name());
                     Toast.makeText(getApplicationContext(), "双屏模式", Toast.LENGTH_SHORT).show();
-                } else if (action == ACTION_START_FOREGROUND_SERVICE) {
+                }  else if (action == ACTION_DEFAULT_MODE) {
+                    ScreenUtils.SwitchToVideoMode();
+                    SPUtil.save("CURRENT_MODE",MODE.VIDEO.name());
+                    //Toast.makeText(getApplicationContext(), "默认双屏模式", Toast.LENGTH_SHORT).show();
+                }else if (action == ACTION_START_FOREGROUND_SERVICE) {
                     startForegroundService();
                     Toast.makeText(getApplicationContext(), "OKAY一键切换屏幕开始运行", Toast.LENGTH_SHORT).show();
                 } else if (action == ACTION_STOP_FOREGROUND_SERVICE) {
