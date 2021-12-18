@@ -100,24 +100,24 @@ public class ScreenUtils {
 
     public static void AdjustResolution() throws IOException, TimeoutException {
         if( CURRENT_MODE==MODE.READ){
-            //exeCommand("wm size 1404x1872");
-            //exeCommand("wm density 300");
-            //750x1000 160
-            exeCommand("wm size 750x1000");
-            exeCommand("wm density 160");
-        }else if( CURRENT_MODE==MODE.VIDEO){
-            //exeCommand("wm size 1200x1920");
-            //exeCommand("wm density 300");
-            //exeCommand("wm size reset");
-            exeCommand("wm size reset");
-            exeCommand("wm density reset");
-        }else if( CURRENT_MODE==MODE.DUAL){
-            //exeCommand("wm size 1200x1920");
-            //exeCommand("wm density 300");
-            //exeCommand("wm size reset");
-            exeCommand("wm size reset");
-            exeCommand("wm density reset");
+            if(DeviceUtils.isOkayS4()) {
+                exeCommand("wm size 1404x1872");
+                exeCommand("wm density 300");
+            }else if(DeviceUtils.isOkayS4Plus()){
+                exeCommand("wm size 825x1200");
+                exeCommand("wm density 187");
+            }
+        }else {
+            if(DeviceUtils.isOkayS4()) {
+                exeCommand("wm size 800x1280");
+                exeCommand("wm density 162");
+            }else if(DeviceUtils.isOkayS4Plus()){
+                exeCommand("wm size 1200x1900");
+                exeCommand("wm density 187");
+            }
+            //exeCommand("wm density reset");
         }
+
         exeCommand("ro.rotation.external true");
         exeCommand("qemu.hw.mainkeys 1");
     }
