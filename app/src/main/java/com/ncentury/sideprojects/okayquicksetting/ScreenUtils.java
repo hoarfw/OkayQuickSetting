@@ -41,8 +41,8 @@ public class ScreenUtils {
 
     public static void OpenEinkDisplay() throws IOException, TimeoutException {
         //打开副屏：打开副屏显示+触摸，显示合适分辨率，设置方向，设置合适参数
-        exeCommand("setprop sys.open.eink.power 1");
-        exeCommand("setprop sys.eink.HandWriter 1");
+        //exeCommand("setprop sys.open.eink.power 1");
+        //exeCommand("setprop sys.eink.HandWriter 1");
         exeCommand("setprop sys.close.subTp 0");
         exeCommand("setprop sys.close.SubPen 0");
         exeCommand("setprop  sys.eink.tp2main 0");
@@ -59,8 +59,8 @@ public class ScreenUtils {
 
     public static void AdjustEinkDisplayInDualMode() throws IOException, TimeoutException {
         //打开副屏：打开副屏显示+触摸，显示合适分辨率，设置方向，设置合适参数
-        exeCommand("setprop sys.open.eink.power 0");
-        exeCommand("setprop sys.eink.HandWriter 0");
+        //exeCommand("setprop sys.open.eink.power 0");
+        //exeCommand("setprop sys.eink.HandWriter 0");
         exeCommand("setprop sys.close.subTp 0");
         exeCommand("setprop sys.close.SubPen 0");
         exeCommand("setprop  sys.eink.tp2main 0");
@@ -74,8 +74,8 @@ public class ScreenUtils {
 
     public static void CloseEinkDisplay() throws IOException, TimeoutException {
         //打开副屏：打开副屏显示+触摸，显示合适分辨率，设置方向，设置合适参数
-        exeCommand("setprop sys.open.eink.power 0");
-        exeCommand("setprop sys.eink.HandWriter 1");
+        //exeCommand("setprop sys.open.eink.power 0");
+        //exeCommand("setprop sys.eink.HandWriter 1");
         exeCommand("setprop sys.close.subTp 1");
         exeCommand("setprop sys.close.SubPen 1");
         //exeCommand("setprop  sys.eink.tp2main 0");
@@ -83,8 +83,8 @@ public class ScreenUtils {
 
     public static void ReconfigEinkDisplay() throws IOException, TimeoutException {
         //重新加载配置
-        exeCommand("qemu.hw.mainkeys 1");
-        //exeCommand("setprop sys.eink.reconfigure 1");
+        //exeCommand("qemu.hw.mainkeys 1");
+        exeCommand("setprop sys.eink.reconfigure 1");
         //exeCommand("input keyevent 26 ");
         //exeCommand("input keyevent 82 ");
         //exeCommand("input keyevent 3 ");
@@ -126,29 +126,28 @@ public class ScreenUtils {
         //LAST_MODE=CURRENT_MODE;
         CURRENT_MODE = MODE.VIDEO;
         DisableMirrorMode();
-        //CloseMainDisplay();
+        OpenEinkDisplay();
         AdjustResolution();
         OpenMainDisplay();
+        ReconfigEinkDisplay();
     }
 
     public static void SwitchToReadMode() throws IOException, TimeoutException {
         //LAST_MODE=CURRENT_MODE;
         CURRENT_MODE = MODE.READ;
-        //CloseMainDisplay();
-        OpenEinkDisplay();
-        AdjustResolution();
         EnableMirrorMode();
         CloseMainDisplay();
+        OpenEinkDisplay();
+        AdjustResolution();
+        ReconfigEinkDisplay();
     }
 
     public static void SwitchToDualMode() throws IOException, TimeoutException {
         //LAST_MODE=CURRENT_MODE;
         CURRENT_MODE = MODE.DUAL;
-        //CloseMainDisplay();
-        //OpenEinkDisplay();
-        OpenMainDisplay();
-        AdjustEinkDisplayInDualMode();
-        AdjustResolution();
         EnableMirrorMode();
+        OpenMainDisplay();
+        AdjustResolution();
+        ReconfigEinkDisplay();
     }
 }

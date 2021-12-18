@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         String action=mode==MODE.READ?"ACTION_READ_MODE":mode==MODE.VIDEO?"ACTION_VIDEO_MODE":"ACTION_DUAL_MODE";
         if(this.getIntent().getBooleanExtra("START_FROM_BOOT",false)){
             //Hard set to VIDEO mode when boot up
-            action="ACTION_DEFAULT_MODE";
+            //action="ACTION_DEFAULT_MODE";
         }
         paramBundle3.setAction(action);
         startService(paramBundle3);
